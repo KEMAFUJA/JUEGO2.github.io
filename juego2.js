@@ -2,14 +2,15 @@
 const levels = [//B=CASA
     { graph: { A: ['C:7','B:20'], B: [], C: ['B:8'] },start: 'A', target: 'B' },
     { graph: { A: ['D:10'], B: [], C: ['B:10'], D: ['C:10']},start: 'A', target: 'B' },
-    /*{ graph: { A: ['B:2', 'D:10'], B: ['C:2'], C: ['D:2'], D: ['E:10'], E: [] },start: 'A', target: 'B' },
-    { graph: { A: ['B:5'], B: ['C:5', 'D:2'], C: ['F:5'], D: ['D:2','F:2'], E: ['A:5'], F:[] },start: 'A', target: 'B' },
-    /*{ graph: { A: ['B'], B: ['C'], C: ['D'], D: ['E'], E: ['F'], F: ['A'] },start: 'A', target: 'B' },
-    { graph: { A: ['D', 'E'], B: ['G'], C: ['G'], D: ['G'], E: ['B','C'], F: ['A'], G: [] },start: 'A', target: 'B' },
-    { graph: { A: [], B: ['D', 'E'], C: ['F'], D: ['A'], E: ['B'], F: ['G'], G: ['B','C'] },start: 'A', target: 'B' },
-    { graph: { A: ['B'], B: ['C', 'D'], C: ['E'], D: ['F'], E: ['G'], F: ['H'], G: ['H'], H: [] },start: 'A', target: 'B' },
-    { graph: { A: ['B'], B: ['C'], C: ['D'], D: ['E'], E: ['F'], F: ['G','H'], G: ['H','A'], H: [] },start: 'A', target: 'B' },
-*/];
+    { graph: { A: ['D:6','C:2','B:20'], B: [], C: [], D: ['E:6'], E: ['B:6'] },start: 'A', target: 'B' },
+    { graph: { A: ['F:10'], B: [], C: ['B:10'], D: ['B:5'], E: ['D:5'], F:['C:10','E:5'] },start: 'A', target: 'B' },
+    { graph: { A: ['G:2','C:10'], B: [], C: ['B:10','D:5'], D: ['E:5'], E: ['B:5'], F: [], G:['C:2','F:2'] },start: 'A', target: 'B' },
+    { graph: { A: ['D:10', 'E:2'], B: [], C: ['B:10'], D: ['H:10'], E: ['H:2'], F: ['A'], G: ['C:10'], H:['G:10'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'H:5', 'C:2'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'H:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'K:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'K:5', 'C:2','J:20','L:50'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },L:['B:50'],start: 'A', target: 'B' },
+];
 //limites para dibujar los nodos
 const limits = {
     topMin: 10,
@@ -62,15 +63,26 @@ const levelsWithRandomPositions = levels.map(level => {
 
 function ponerPosicionNodo(level) {
     const posicion = levelsWithRandomPositions[level].positions; // Obtener posiciones del nivel
+    const nombres = ['QUIL', 'TROZ', 'MOFE', 'XYPA', 'WERO', 'KNOZ', 'VRIX', 'PAXU', 'LURN', 'ZEKY']; // Lista de nombres
+    // Mezclar los nombres aleatoriamente
+    const shuffledNames = nombres.sort(() => Math.random() - 0.5);
+
+    let i = 0; // Índice para asignar los nombres
     for (const [node, pos] of Object.entries(posicion)) {
         const elem = document.getElementById(node);
         if (elem) {
             elem.style.position = 'absolute';
             elem.style.top = pos.top;
             elem.style.left = pos.left;
+            
+            // Asignar el nombre aleatorio al innerText
+            if (i>1){
+            elem.innerText = shuffledNames[i];}
+            i++; // Incrementar el índice
         }
     }
 }
+
 
 let currentLevel = 0;
 currentNode = levels[currentLevel].start;
@@ -94,14 +106,14 @@ function move(node) {
         const { weight } = DividirConexion(conexion);
         document.getElementById('escogiste').innerText = "ESCOGISTE EL NODO: " + document.getElementById(node).innerText;
         dibujarLinea(currentNode, node, 'green'); // Dibujar la línea de conexión válida
-        score += weight;
+        updateScore(weight);
         // Cambiar el color del nodo visitado
         document.getElementById(node).style.backgroundColor = '#2ecc71';
         currentNode = node;
     } else {
         // Conexión inválida
         dibujarLinea(currentNode, node, 'red'); // Línea roja
-        score -= 5; // Penalización
+        updateScore(-5); // Penalización
 
         // Reinicia el juego limpiando las líneas y el estado
         setTimeout(() => {
@@ -111,7 +123,7 @@ function move(node) {
 
         currentNode = levels[currentLevel].start; // Reiniciar al nodo inicial
     }
-    updateScore();
+    
     checkWin();
 }
 
@@ -144,12 +156,14 @@ function checkWin() {
         setTimeout(() => {
             if (currentLevel < levels.length - 1) {
                 document.getElementById('escogiste').innerText = "";
+                document.getElementById('informacion2').innerText = "";
                 sigLevel();
             } else {
                 // Último nivel completado
                 document.getElementById('message').innerText = "¡Juego terminado! Has completado todos los niveles.";
                 document.getElementById('informacion').innerText = "FELICIDADES";
-                document.getElementById('escogiste').innerText = ""; 
+                document.getElementById('escogiste').innerText = "";
+                document.getElementById('SEGUNDO').innerText = ""; 
                 // Mostrar botón para reiniciar
                 /*const restartButton = document.getElementById('button');
                 restartButton.style.display = 'block';
@@ -211,8 +225,7 @@ function sigLevel() {
     currentNode = levels[currentLevel].start;  // Establecer el nodo de inicio del nuevo nivel
     targetNode = levels[currentLevel].target;  // Establecer el nodo objetivo para el nuevo nivel
     if (score !== 0){  
-    score += 20;}//Bonificación de puntos por avanzar de nivel
-    updateScore();
+        updateScore(20);}//Bonificación de puntos por avanzar de nivel  
 
     // Actualizar el nivel en la interfaz
     document.getElementById('level').innerText = "Nivel: " + (currentLevel + 1);
@@ -227,8 +240,20 @@ function sigLevel() {
 
 
 // Función para actualizar el puntaje
-function updateScore() {
-    document.getElementById('score').innerText = "Puntaje: " + score;
+function updateScore( pts) {
+    setTimeout(() => {
+        score+=pts;
+        document.getElementById('score').innerText = "Puntaje " + score ; // Borrar mensaje
+    }, 1000);
+    if (pts < 0) {
+        document.getElementById('score').innerText = "Puntaje: " + (score +""+ pts);
+        document.getElementById('score').className = 'num';
+    } else if (pts > 0) {
+        document.getElementById('score').innerText = "Puntaje: " + (score + "+" + pts);
+        document.getElementById('score').className = 'numero';
+    }
+    
+
 }
 
 // Función para reiniciar los nodos
@@ -395,6 +420,7 @@ function startGame() {
     document.getElementById('level').innerText = "Nivel: 1";
     document.getElementById('score').innerText = "Puntaje: 0";
     document.getElementById('informacion').innerText = "";
+    document.getElementById('informacion2').innerText = "";
     document.getElementById('message').innerText = "";
     document.getElementById('escogiste').innerText = "";
     //document.getElementById('button').style.display = 'none';
@@ -407,7 +433,7 @@ function startGame() {
         node.style.left = '';
     });
 
-    updateScore();  // Mostrar puntaje inicial
+    updateScore(0);  // Mostrar puntaje inicial
     resetCanvas();
     resetNodes();
     ponerPosicionNodo(currentLevel);
