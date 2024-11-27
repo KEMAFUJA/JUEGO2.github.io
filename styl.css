@@ -81,9 +81,42 @@ h1 {
   color: transparent;
   animation: shine 10s infinite linear, glow 10S infinite;
 }
+
+.texto-grande{
+  font-size: 100px;
+  margin: 0;
+}
+
+.no-olvides{
+  animation: hearbeat 5s infinite ease;
+}
+
+.memo{
+  
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5)); /* Fondo de gradiente */
+  background-size: 200% 100%; /* Aumenta el tamaño para que el movimiento sea más visible */
+  font-size:40px ;
+  color: rgba(200, 200, 200, 0.2);
+  animation: glow 10s infinite;
+}
 @keyframes shine {
   0% { background-position: 0px; }
   100% { background-position: 500px; }
+}
+@keyframes color {
+  0%, 100% {
+    color: 
+      0 0 5px rgba(255, 255, 255, 0.1), /* Brillo inicial/final bajo */
+      0 0 10px rgba(255, 255, 255, 0.1), 
+      0 0 15px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    color: 
+      0 0 5px rgba(255, 255, 255, 0.6), /* Brillo máximo en el centro */
+      0 0 10px rgba(255, 255, 255, 0.4), 
+      0 0 15px rgba(255, 255, 255, 0.2);
+  }
 }
 @keyframes glow {
   0%, 100% {
@@ -111,22 +144,6 @@ h1 {
     animation:heartbeat 10s infinite; background-color:rgba(255, 255, 255, 0.114);
 }
 
-.node {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #3498db;
-    color: white;
-    text-align: center;
-    line-height: 40px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.node:hover {
-    background-color: #2980b9;
-}
 
 #message {
     margin-top: 20px;
@@ -135,8 +152,8 @@ h1 {
 }
 .node {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     
     color: white;
@@ -145,6 +162,9 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s;
     z-index: 10;
+}
+.node:hover {
+  background-color: #2980b9;
 }
 
 /* Ubicación de los nodos */
