@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.6">
+    <link rel="icon" href="logo.webp" type="image/webp">
+    <title>MEMORIZ-ARTE</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="centered-container">
+    <h1 id="PRIMERO" class="shiny-title">MEMORIZANDO: Encuentra el camino</h1>
+    <img id="victoryImage" src="final.gif" alt="Victoria" style="display:none;" width="50%">
+    <button id="iniciar" class="curtain-button" data-label="EMPEZAR">EMPEZAR</button>
+    <!--div>
+      <button id="play-level">Jugar Solo este Nivel</button>
+      <button id="play-all-levels">Completar Todos los Niveles</button>
+      
+  </div-->
+  
+  </div>
+  
+  <div id="card" class="card" style="display: none;">    
+    <h1 class="shiny-title">MEMORIZANDO: Encuentra el camino</h1>
+    <DIV id="informacion" style="color: aliceblue;"> Ayuda a Juanito a llegar a Casa</DIV>
+    
+    <div class="dropdown">
+        <p class="dropdown-toggle" href="javascript:void(0);" style="color: azure;">Mas informacion sobre el juego</p>
+        <div class="content">
+          <ul>
+            <li><strong>AYUDA A JUANITO, PERO TEN CUIDADO</strong>
+              <!--ul>
+                <li>Tienes que hallar el camino al nodo destino.</li>
+                <li>Si te quivocas se reinicia el juego, pero tus puntos se mantienen.</li>
+                <li>Si llegas al nodo final, pasas al siguiente nivel y ganas +20.</li>
+                <li>Solo debes dar click al nodo que creas que es el camino</li>
+                <li>Cada movimiento tiene un puntaje, si aciertas es +10, si no, es -5.</li>
+              </ul-->
+              <ul>
+                <li>Tienes que hallar el camino a la casa de Juanito. 😊</li>
+                <li>Hay caminos que si estan libres (<span class="numero">verdes</span>), pero hay caminos que no (<span class="num">rojos</span>).</li>
+                <li>Si vas por el camino correcto ganaras puntos <span class="numero">(de 5 a 20 pts)</span> 😊, pero si te equivocas bajaras puntos <span class="num">(-5pts)</span> 😢.</li>
+                <li>Para avanzar solo debes dar click a la ciudad que creas que es el camino correcto 👌.</li>
+                <li>Puedes utilizar Pista si tienes dudas, pero no ganaras pts 🤨.</li>
+                <li>Ejercita tu memoria y asi ganaras mas puntos 😎.</li>
+              </ul>
+            </li>
+            
+          </ul>
+        </div>
+      </div>
+      <div class="button-container">
+        <button id="toggleMusic" class="curtain-button" data-label="PAUSAR MUSICA">PAUSAR MUSICA</button>
+        <button id="hint-button" class="curtain-button" data-label="Pista">Mostrar pista</button>
+    </div>
+    <DIV id="informacion2" style="color: aliceblue;"></DIV>
+    <div id="graph-container">
+        
+        <div id="graph">
+            <canvas id="canvas" width="600" height="400"></canvas>
+            <div class="node" id="L" onclick="move('L')">QUIL</div>
+            <div class="node" id="K" onclick="move('K')">TROZ</div>
+            <div class="node" id="J" onclick="move('J')">MOFE</div>
+            <div class="node" id="I" onclick="move('I')">XYPA</div>
+            <div class="node" id="H" onclick="move('H')">WERO</div>
+            <div class="node" id="G" onclick="move('G')">KNOZ</div>
+            <div class="node" id="F" onclick="move('F')">VRIX</div>
+            <div class="node" id="E" onclick="move('E')">PAXU</div>
+            <div class="node" id="D" onclick="move('D')">LURN</div>
+            <div class="node" id="C" onclick="move('C')">ZEKY</div>
+            <div class="node" id="B" onclick="move('B')">CASA</div>
+            <div class="node" id="A" onclick="move('A')">JUANITO</div>
+        </div>
+        
+      </div>
+    <div id="escogiste" style="color: aliceblue;"></div>
+    <div id="message" style="color: aliceblue;"></div>
+    
+    <div id="level" style="color: aliceblue;">Nivel: 1</div>
+    <div id="score" style="color: aliceblue;">Puntaje: 0</div>
+    
+    <p><strong style="color: aliceblue;">WhatsApp:</strong> <a href="https://api.whatsapp.com/send?phone=59171055268&text=Hola%20KVN%20soy%20" target="_blank">CONTÁCTATE CONMIGO</a></p>
+    
+  </DIv>
+
+<audio id="victoryAudio" src="Lo fundamental La Hormiga.mp3" preload="auto"></audio>
+<audio id="backgroundMusic"></audio>
+<script src="juego4.js"></script>
+</body>
+</html>

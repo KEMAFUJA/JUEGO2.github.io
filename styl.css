@@ -1,0 +1,321 @@
+@keyframes backgroundImageChange {
+    0% {
+      background-image: url('imagen1.jpg');
+      filter: blur(25px);
+    }
+    25% {
+      background-image: url('imagen2.jpg');
+      filter: blur(20px);
+    }
+    50% {
+      background-image: url('imagen3.jpg');
+      filter: blur(15px);
+    }
+    75% {
+      background-image: url('imagen4.jpg');
+      filter: blur(10px);
+    }
+    100% {
+      background-image: url('imagen1.jpg');
+      filter: blur(25px);
+    }
+  }
+
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    position: relative;    
+    animation: heartbeat 20s infinite; 
+  }
+
+.bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation: backgroundImageChange 20s infinite;
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Mantiene el fondo detrás del contenido */
+}
+
+@keyframes backgroundColorChange3 {
+  0% {background-color: #ffffff50; }
+  33% {background-color: #ff7b7b50;} 
+  66% {background-color: #ffe47950;}
+  99% {background-color: #86ff8450;}
+  0% {background-color: #ffffff50; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.01); }
+}
+  /*CUBO*/
+  .card {  
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 1);
+    padding: 50px;
+    width: 700px;
+    text-align: center;
+    animation: backgroundColorChange3 40s ease-in-out infinite, heartbeat 2.5s infinite;
+    /*animation:heartbeat 2.5s infinite; background-color:rgba(255, 255, 255, 0.114);*/
+  }
+
+h1 {
+    color: #333;
+}
+.shiny-title {
+  font-size: 36px;
+  font-weight: bold;
+  background: linear-gradient(100deg, rgba(116, 116, 116, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255,255,255,0) 100%);
+  background-size: 500px 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 10s infinite linear, glow 10S infinite;
+}
+@keyframes shine {
+  0% { background-position: 0px; }
+  100% { background-position: 500px; }
+}
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 5px rgba(255, 255, 255, 0.1), /* Brillo inicial/final bajo */
+      0 0 10px rgba(255, 255, 255, 0.1), 
+      0 0 15px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    text-shadow: 
+      0 0 5px rgba(255, 255, 255, 0.6), /* Brillo máximo en el centro */
+      0 0 10px rgba(255, 255, 255, 0.4), 
+      0 0 15px rgba(255, 255, 255, 0.2);
+  }
+}
+
+#graph {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 10px;
+    animation:heartbeat 10s infinite; background-color:rgba(255, 255, 255, 0.114);
+}
+
+.node {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.node:hover {
+    background-color: #2980b9;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.node {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 10;
+}
+
+/* Ubicación de los nodos */
+#A, #B {
+  width: 100px;   /* Ancho del cuadrado */
+  height: 20px;  /* Altura igual al ancho */
+  background-color: blue; /* Color de fondo */
+  text-align: center;  /* Centra el texto horizontalmente */
+  line-height: 20px;  /* Centra el texto verticalmente */
+  color: white; /* Color del texto */
+  position: absolute;  /* Asegura que la posición sea relativa al contenedor */
+  border-radius: 0;  /* Asegura que no tenga bordes redondeados */
+}
+#D { top: 405px; left: 10px; }
+#E { top: 405px; left: 25px; }
+#F { top: 405px; left: 40px; }
+#G { top: 405px; left: 50px; }
+#H { top: 405px; left: 65px; }
+#I { top: 405px; left: 80px; }
+#J { top: 405px; left: 95px; }
+#K { top: 405px; left: 110px; }
+#L { top: 405px; left: 125px; }
+
+
+#message, #score, #level {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#level {
+    font-size: 20px;
+}
+
+
+/* Estilo para el enlace */
+.dropdown-toggle {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Contenido oculto por defecto */
+  .content {
+    display: none;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    text-align: left; /* Alineación de texto a la izquierda */
+  }
+  
+  /* Mostrar contenido al pasar el mouse sobre el enlace o el contenedor */
+  .dropdown:hover .content {
+    display: block;
+  }
+  
+  /* Estilos para la lista */
+  ul {
+    list-style-type: none; /* Quita los puntos */
+    padding-left: 0;
+    margin: 0 0 10px 0;
+  }
+  
+  li {
+    margin-bottom: 0px;
+    text-align: center; /* Centra el texto dentro de cada li */
+  }
+  
+  ul {
+    padding-left: 20px; /* Indentación para sublistas */
+  }
+  
+  strong {
+    font-size: 1.1em; /* Resaltar el título */
+    color: #333;
+  }
+  
+  .color-change-button {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white; /* Color del texto */
+    background-color: #3498db; /* Color inicial del botón */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave solo para el fondo */
+}
+
+.color-change-button:hover {
+    background-color: #2ecc71; /* Color cuando el mouse está encima */
+}
+
+
+
+.curtain-button {
+  position: relative;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #3498db; /* Color inicial del botón */
+  border: none;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Transición suave */
+  margin: 10px;
+}
+
+.curtain-button:before {
+  content: attr(data-label); /* Usar un atributo personalizado para el texto */
+  display: flex; /* Usar flexbox para alinear */
+  justify-content: center; /* Centrado horizontal */
+  align-items: center; /* Centrado vertical */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2ecc71; /* Color de la cortina */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.curtain-button:hover:before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+@keyframes backgroundColorChange {
+  0% { color: #81ff76; }
+  33% { color: #00ff2f; } 
+  66% { color:#00a21e; }
+  100% { color: #81ff76; }
+  }
+a{
+font-size: 15px;
+text-decoration: none;    
+animation: backgroundColorChange 5s ease-in-out infinite;
+}
+
+
+.centered-container {
+  display: flex;
+  flex-direction: column; /* Alinea elementos en columna */
+  align-items: center;    /* Centra horizontalmente */
+  justify-content: center; /* Centra verticalmente */
+  height: 50vh;           /* Altura del contenedor */
+  text-align: center;     /* Alineación de texto */
+}
+
+#victoryImage {
+  display: block;         /* Asegúrate de que se muestre cuando sea necesario */
+  margin: 0 auto;         /* Centra la imagen */
+}
+
+.num {
+  color: red; /* Cambia el color aquí */
+  font-weight: bold; /* Opcional: resaltar */
+}
+
+.numero {
+  color: green; /* Cambia el color aquí */
+  font-weight: bold; /* Opcional: resaltar */
+}
+
+.button-container button {
+  display: inline-block; /* Hace que los botones estén en línea */
+  margin-right: 10px;    /* Espacio entre botones */
+}
