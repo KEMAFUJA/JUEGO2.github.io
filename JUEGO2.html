@@ -10,7 +10,8 @@
 <body>
   <div class="bg"></div>
   <div class="centered-container">
-    <h1 id="PRIMERO" class="shiny-title">MEMORIZANDO: Encuentra el camino</h1>
+    <h1 id="PRIMERO" class="shiny-title texto-grande">MEMORIZANDO 🧠</h1>
+    <h1 id="SEGUNDO" class="shiny-title texto-grande">Encuentra el camino</h1>
     <img id="victoryImage" src="final.gif" alt="Victoria" style="display:none;" width="50%">
     <button id="iniciar" class="curtain-button" data-label="EMPEZAR">EMPEZAR</button>
     <!--div>
@@ -22,14 +23,14 @@
   </div>
   
   <div id="card" class="card" style="display: none;">    
-    <h1 class="shiny-title">MEMORIZANDO: Encuentra el camino</h1>
+    <h1 class="shiny-title">MEMORIZANDO 🧠: Encuentra el camino</h1>
     <DIV id="informacion" style="color: aliceblue;"> Ayuda a Juanito a llegar a Casa</DIV>
     
     <div class="dropdown">
-        <p class="dropdown-toggle" href="javascript:void(0);" style="color: azure;">Mas informacion sobre el juego</p>
+        <p class="dropdown-toggle" href="javascript:void(0);" style="color: azure;">COMO JUGAR?</p>
         <div class="content">
           <ul>
-            <li><strong>AYUDA A JUANITO, PERO TEN CUIDADO</strong>
+            <li><strong>AYUDA A JUANITO, PERO TEN CUIDADO 😱🥶</strong>
               <!--ul>
                 <li>Tienes que hallar el camino al nodo destino.</li>
                 <li>Si te quivocas se reinicia el juego, pero tus puntos se mantienen.</li>
@@ -40,10 +41,14 @@
               <ul>
                 <li>Tienes que hallar el camino a la casa de Juanito. 😊</li>
                 <li>Hay caminos que si estan libres (<span class="numero">verdes</span>), pero hay caminos que no (<span class="num">rojos</span>).</li>
-                <li>Si vas por el camino correcto ganaras puntos <span class="numero">(de 5 a 20 pts)</span> 😊, pero si te equivocas bajaras puntos <span class="num">(-5pts)</span> 😢.</li>
+                <li>Si vas por el camino correcto ganaras puntos <span class="numero">(de 5 a 50 pts)</span> 😊, pero si te equivocas bajaras puntos <span class="num">(-5pts)</span> 😢 e iniciaras de nuevo el nivel 😥.</li>
                 <li>Para avanzar solo debes dar click a la ciudad que creas que es el camino correcto 👌.</li>
-                <li>Puedes utilizar Pista si tienes dudas, pero no ganaras pts 🤨.</li>
+                <li>OJO 👁️, que no puedas ir de una ciudad a otra no significa que de otra no puedas ir, para ir a una ciudad tienes mas de un camino 🤯.</li>
+                <li>Puedes utilizar "MOSTRAR PISTA" si tienes dudas, pero no ganaras pts 🤨.</li>
                 <li>Ejercita tu memoria y asi ganaras mas puntos 😎.</li>
+                <li>Esto no tenia que decirte, espero no me despidan 😛, pero si un movimiento te da menos de los <span class="numero">5pts</span> minimos, ese no es el camino correcto 🫠. <span class="no-olvides">NO LO OLVIDES!!!.</span> </li>
+                <LI>JUEGA, DIVIERTETE Y GANA EJERCITANDO TU MEMORIA 🧠😀 </LI>
+                <li class="memo">MEMORIZ-ARTE</li>
               </ul>
             </li>
             
@@ -59,16 +64,16 @@
         
         <div id="graph">
             <canvas id="canvas" width="600" height="400"></canvas>
-            <div class="node" id="L" onclick="move('L')">QUIL</div>
-            <div class="node" id="K" onclick="move('K')">TROZ</div>
-            <div class="node" id="J" onclick="move('J')">MOFE</div>
-            <div class="node" id="I" onclick="move('I')">XYPA</div>
-            <div class="node" id="H" onclick="move('H')">WERO</div>
-            <div class="node" id="G" onclick="move('G')">KNOZ</div>
-            <div class="node" id="F" onclick="move('F')">VRIX</div>
-            <div class="node" id="E" onclick="move('E')">PAXU</div>
-            <div class="node" id="D" onclick="move('D')">LURN</div>
-            <div class="node" id="C" onclick="move('C')">ZEKY</div>
+            <div class="node" id="L" onclick="move('L')">10</div>
+            <div class="node" id="K" onclick="move('K')">9</div>
+            <div class="node" id="J" onclick="move('J')">8</div>
+            <div class="node" id="I" onclick="move('I')">7</div>
+            <div class="node" id="H" onclick="move('H')">6</div>
+            <div class="node" id="G" onclick="move('G')">5</div>
+            <div class="node" id="F" onclick="move('F')">4</div>
+            <div class="node" id="E" onclick="move('E')">3</div>
+            <div class="node" id="D" onclick="move('D')">2</div>
+            <div class="node" id="C" onclick="move('C')">1</div>
             <div class="node" id="B" onclick="move('B')">CASA</div>
             <div class="node" id="A" onclick="move('A')">JUANITO</div>
         </div>
