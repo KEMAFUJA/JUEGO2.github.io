@@ -12,12 +12,20 @@
   <div class="centered-container">
     <h1 id="PRIMERO" class="shiny-title texto-grande">MEMORIZANDO 🧠</h1>
     <h1 id="SEGUNDO" class="shiny-title texto-grande">Encuentra el camino</h1>
-    <img id="victoryImage" src="final.gif" alt="Victoria" style="display:none;" width="50%">
+    <img id="victoryImage" src="final.gif" alt="Victoria" style="display:none;" width="35%">
     <button id="iniciar" class="curtain-button" data-label="EMPEZAR">EMPEZAR</button>
+    <button id="puntajes" class="curtain-button" data-label="PUNTAJES">PUNTAJES</button>
+    <div id="scoresModal" class="modal" style="display: none;">
+      <div class="modal-content">
+          <h2>Top 10 Puntajes 😎</h2>
+          <ul id="scoresList"></ul>
+          <button id="closeScoresModal" class="curtain-button" data-label="CERRAR">Cerrar</button>
+      </div>
+    </div>  
+  
     <!--div>
       <button id="play-level">Jugar Solo este Nivel</button>
-      <button id="play-all-levels">Completar Todos los Niveles</button>
-      
+      <button id="play-all-levels">Completar Todos los Niveles</button>      
   </div-->
   
   </div>
@@ -43,6 +51,7 @@
                 <li>Hay caminos que si estan libres (<span class="numero">verdes</span>), pero hay caminos que no (<span class="num">rojos</span>).</li>
                 <li>Si vas por el camino correcto ganaras puntos <span class="numero">(de 5 a 50 pts)</span> 😊, pero si te equivocas bajaras puntos <span class="num">(-5pts)</span> 😢 e iniciaras de nuevo el nivel 😥.</li>
                 <li>Para avanzar solo debes dar click a la ciudad que creas que es el camino correcto 👌.</li>
+                <li>Cada nivel o cada mapa es unico, nunca son iguales 🤓🫣.</li>
                 <li>OJO 👁️, que no puedas ir de una ciudad a otra no significa que de otra no puedas ir, para ir a una ciudad tienes mas de un camino 🤯.</li>
                 <li>Puedes utilizar "MOSTRAR PISTA" si tienes dudas, pero no ganaras pts 🤨.</li>
                 <li>Ejercita tu memoria y asi ganaras mas puntos 😎.</li>
@@ -88,7 +97,14 @@
     <p><strong style="color: aliceblue;">WhatsApp:</strong> <a href="https://api.whatsapp.com/send?phone=59171055268&text=Hola%20KVN%20soy%20" target="_blank">CONTÁCTATE CONMIGO</a></p>
     
   </DIv>
-
+  <div id="modal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>¡Felicidades! 🎉🎈</h2>
+        <p>Por favor, ingresa tu nombre para guardar tu puntuación 😀:</p>
+        <input type="text" id="playerName" placeholder="Tu nombre">
+        <button id="saveScore">Guardar Puntuación</button>
+    </div>
+</div>
 <audio id="victoryAudio" src="Lo fundamental La Hormiga.mp3" preload="auto"></audio>
 <audio id="backgroundMusic"></audio>
 <script src="juego2.js"></script>
