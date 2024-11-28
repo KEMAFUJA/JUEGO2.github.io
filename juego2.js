@@ -87,7 +87,8 @@ function ponerPosicionNodo(level) {
 let currentLevel = 0;
 currentNode = levels[currentLevel].start;
 let targetNode = levels[currentLevel].target;
-let score = 0;
+let score = 0; let scoreant = 0;
+let antscore = false;
 
 // Función para mover al siguiente nodo
 function DividirConexion(connection) {
@@ -221,12 +222,14 @@ function playNivelAudio(level) {
 
 
 function sigLevel() {
+    
     currentLevel++;  // Incrementar el nivel
     currentNode = levels[currentLevel].start;  // Establecer el nodo de inicio del nuevo nivel
     targetNode = levels[currentLevel].target;  // Establecer el nodo objetivo para el nuevo nivel
-    if (score !== 0){  
-        updateScore(20);}//Bonificación de puntos por avanzar de nivel  
-
+    if (!antscore){
+        updateScore(20);
+        scoreant=score;}//Bonificación de puntos por avanzar de nivel  
+        antscore=false;
     // Actualizar el nivel en la interfaz
     document.getElementById('level').innerText = "Nivel: " + (currentLevel + 1);
     //document.getElementById('informacion').innerText = "Estás en el nodo " + currentNode + " y debes llegar al nodo " + targetNode;
@@ -318,6 +321,7 @@ iniciarButton.onclick = function () {
 
 
 function giveHint() {
+    antscore=true;
     const connections = levels[currentLevel].graph[currentNode];
     if (!connections || connections.length === 0) {
         document.getElementById('informacion2').innerText = "No hay conexiones desde este nodo.";
@@ -407,7 +411,7 @@ function startGame() {
     currentLevel = 0;
     currentNode = levels[currentLevel].start;
     targetNode = levels[currentLevel].target;
-    score = 0;
+    score = 0;scoreant = 0;antscore=false;
     document.getElementById('victoryImage').style.display = 'none';
     document.getElementById('victoryAudio').pause();
     document.getElementById('victoryAudio').currentTime=0;
