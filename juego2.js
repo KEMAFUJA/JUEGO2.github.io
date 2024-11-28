@@ -5,12 +5,12 @@ const levels = [//B=CASA
     { graph: { A: ['D:6','C:2','B:20'], B: [], C: [], D: ['E:6'], E: ['B:6'] },start: 'A', target: 'B' },
     { graph: { A: ['F:10'], B: [], C: ['B:10'], D: ['B:5'], E: ['D:5'], F:['C:10','E:5'] },start: 'A', target: 'B' },
     { graph: { A: ['G:2','C:10'], B: [], C: ['B:10','D:5'], D: ['E:5'], E: ['B:5'], F: [], G:['C:2','F:2'] },start: 'A', target: 'B' },
-    { graph: { A: ['D:10', 'E:2'], B: [], C: ['B:10'], D: ['H:10'], E: ['H:2'], F: ['A'], G: ['C:10'], H:['G:10'] },start: 'A', target: 'B' },
-    { graph: { A: ['I:10', 'H:5', 'C:2'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',] },start: 'A', target: 'B' },
-    { graph: { A: ['I:10', 'H:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'] },start: 'A', target: 'B' },
-    { graph: { A: ['I:10', 'K:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },start: 'A', target: 'B' },
-    { graph: { A: ['I:10', 'K:5', 'C:2','J:20','L:50'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: ['A'], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },L:['B:50'],start: 'A', target: 'B' },
-];
+    { graph: { A: ['D:10', 'E:2'], B: [], C: ['B:10'], D: ['H:10'], E: ['H:2'], F: [], G: ['C:10'], H:['G:10'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'H:5', 'C:2'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: [], G: ['C:10'], H:['E:5','B:10'], I:['D:10',] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'H:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: [], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'K:5', 'C:2','J:20'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: [], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },start: 'A', target: 'B' },
+    { graph: { A: ['I:10', 'K:5', 'C:2','J:20','L:50'], B: [], C: ['B:50'], D: ['H:10'], E: ['B:5'], F: [], G: ['C:10'], H:['E:5','B:10'], I:['D:10',],J:['B:20'],K:['H:5'] },L:['B:50'],start: 'A', target: 'B' },
+/**/];
 //limites para dibujar los nodos
 const limits = {
     topMin: 10,
@@ -105,14 +105,14 @@ function move(node) {
     if (conexion) {
         // Conexión válida
         const { weight } = DividirConexion(conexion);
-        document.getElementById('escogiste').innerText = "ESCOGISTE EL NODO: " + document.getElementById(node).innerText;
+        document.getElementById('escogiste').innerText = "ESCOGISTE LA CIUDAD: " + document.getElementById(node).innerText;
         dibujarLinea(currentNode, node, 'green'); // Dibujar la línea de conexión válida
         updateScore(weight);
         // Cambiar el color del nodo visitado
         document.getElementById(node).style.backgroundColor = '#2ecc71';
         currentNode = node;
     } else {
-        // Conexión inválida
+        document.getElementById('escogiste').innerText = "CAMINO A: " + document.getElementById(node).innerText +" DAÑADO.";
         dibujarLinea(currentNode, node, 'red'); // Línea roja
         updateScore(-5); // Penalización
 
@@ -161,6 +161,7 @@ function checkWin() {
                 sigLevel();
             } else {
                 // Último nivel completado
+                document.getElementById('modal').style.display = 'flex'; // Mostrar el modal
                 document.getElementById('message').innerText = "¡Juego terminado! Has completado todos los niveles.";
                 document.getElementById('informacion').innerText = "FELICIDADES";
                 document.getElementById('escogiste').innerText = "";
@@ -171,7 +172,8 @@ function checkWin() {
                 restartButton.onclick = restartGame;
                 document.body.appendChild(restartButton);*/
                 document.querySelector('.centered-container').style.display = 'block';
-                document.getElementById('PRIMERO').textContent = 'FELICIDADES GANASTE CON ' + score + 'PTS.'; 
+                document.getElementById('PRIMERO').textContent = 'FELICIDADES '; 
+                document.getElementById('SEGUNDO').textContent = 'GANASTE CON ' + score + 'PTS. 🎉'; 
                 document.getElementById('iniciar').textContent = 'JUGAR DE NUEVO'; 
                 
                 document.getElementById('victoryImage').style.display = 'block';
@@ -190,6 +192,35 @@ function checkWin() {
         }, 2000);
     }
 }
+
+document.getElementById('saveScore').addEventListener('click', () => {
+    const playerName = document.getElementById('playerName').value;
+    if (playerName.trim() === "") {
+        alert("Por favor, ingresa un nombre válido.");
+        return;
+    }
+
+    // Enviar los datos al servidor
+    fetch('/serverJuego.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({playerName, score})
+    })
+    alert("¡Puntuación guardada exitosamente!");
+    document.getElementById('modal').style.display = 'none'; // Ocultar el modal
+    /*.then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            
+            
+        } else {
+            alert("Hubo un problema al guardar la puntuación.");
+        }
+    })
+    .catch(error => {
+        console.error("Error al guardar puntuación:", error);
+    });*/
+});
 
 // Definir el archivo de audio "Nivel"
 const audioNivel = new Audio('nivel.wav'); // Este archivo dice "Nivel"
@@ -221,8 +252,7 @@ function playNivelAudio(level) {
 }
 
 
-function sigLevel() {
-    
+function sigLevel() {    
     currentLevel++;  // Incrementar el nivel
     currentNode = levels[currentLevel].start;  // Establecer el nodo de inicio del nuevo nivel
     targetNode = levels[currentLevel].target;  // Establecer el nodo objetivo para el nuevo nivel
@@ -312,7 +342,7 @@ const iniciarButton = document.getElementById('iniciar');
 iniciarButton.onclick = function () {
     const centeredContainer = document.querySelector('.centered-container');
     centeredContainer.style.display = 'none';
-
+    //document.getElementById('puntaje').style.display='none';
     const gameContainer = document.querySelector('.card');
     gameContainer.style.display = 'block';
 
@@ -342,8 +372,8 @@ function giveHint() {
 
     if (bestMove) {
         nodo=DividirConexion(bestMove).node;
-        document.getElementById('informacion2').innerText = "Pista: Sigue el camino hacia el nodo " + document.getElementById(nodo).innerText;
-        document.getElementById('escogiste').innerText = "ESCOGISTE EL NODO: " + document.getElementById(nodo).innerText;
+        document.getElementById('informacion2').innerText = "Pista: Sigue el camino hacia la ciudad " + document.getElementById(nodo).innerText;
+        document.getElementById('escogiste').innerText = "ESTAS EN LA CIUDAD: " + document.getElementById(nodo).innerText;
         dibujarLinea(currentNode, nodo, 'green');
         document.getElementById(nodo).style.backgroundColor = '#2ecc71';
         currentNode = nodo;
@@ -477,3 +507,53 @@ function toggleDropdown() {
       }
   });
   
+
+
+
+
+
+  document.getElementById('puntajes').addEventListener('click', async () => {
+    try {
+        const response = await fetch('/serverJuego.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'getTopScores' }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.success) {
+            const scoresList = document.getElementById('scoresList');
+            scoresList.innerHTML = ''; // Limpiar lista anterior
+        
+            data.scores.forEach((score, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${index + 1}. ${score.nombre} -> ${score.puntos}`;
+        
+                // Asignar clases según la posición
+                if (index < 3) {
+                    li.classList.add('numero'); // Primeros 3 en verde
+                } else if (index >= data.scores.length - 2) {
+                    li.classList.add('num'); // Últimos 2 en rojo
+                }
+        
+                scoresList.appendChild(li);
+            });
+        
+            document.getElementById('scoresModal').style.display = 'flex';
+        } else {
+            alert(data.error || 'No se pudieron cargar los puntajes.');
+        }
+        
+    } catch (error) {
+        alert('Error al obtener los puntajes: ' + error.message);
+    }
+});
+
+document.getElementById('closeScoresModal').addEventListener('click', () => {
+    document.getElementById('scoresModal').style.display = 'none';
+});
